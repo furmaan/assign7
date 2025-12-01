@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void improvedSelectionSort(vector<int>& a){
+    int n=a.size();
+    int left=0,right=n-1;
+    while(left<right){
+        int minIdx=left,maxIdx=right;
+        if(a[minIdx]>a[maxIdx]) swap(a[minIdx],a[maxIdx]);
+        for(int i=left+1;i<right;i++){
+            if(a[i]<a[minIdx]) minIdx=i;
+            if(a[i]>a[maxIdx]) maxIdx=i;
+        }
+        swap(a[left],a[minIdx]);
+        if(maxIdx==left) maxIdx=minIdx;
+        swap(a[right],a[maxIdx]);
+        left++;
+        right--;
+    }
+}
+
+int main(){
+    int n;
+    cout<<"Enter number of elements: ";
+    cin>>n;
+    vector<int>a(n);
+    cout<<"Enter elements:\n";
+    for(int i=0;i<n;i++) cin>>a[i];
+    improvedSelectionSort(a);
+    cout<<"Sorted array: ";
+    for(int x:a) cout<<x<<" ";
+    cout<<'\n';
+    return 0;
+}
